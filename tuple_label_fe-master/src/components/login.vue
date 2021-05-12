@@ -1,9 +1,9 @@
 <template>
-  <div class="login_container">
-    <div class="login_box">
+  <div class="login_container" >
+    <div class="login_box" onmouseover="this.style.opacity=0.9" onmouseout="this.style.opacity=0.5">
       <!-- 头像区域 -->
       <div class="avatar_box">
-        <img src="../assets/logo.png" alt="">
+        <img src="../assets/logo.png" alt="" >
       </div>
       <!-- 登录表单区域 -->
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
@@ -79,8 +79,10 @@
 </script>
 <!--加上scoped是将样式应用于此组件，不加是全局-->
 <style lang="less" scoped>
+
   .login_container {
     background-color: rgba(21, 35, 242, 0.25);
+    background-image:url(../assets/images/background_img.jpg);
     height: 100%;
   }
 
@@ -94,7 +96,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
+    opacity: 0.5;
+    transition: opacity 1s;
     .avatar_box {
       height: 130px;
       width: 130px;
@@ -113,6 +116,7 @@
         height: 100%;
         border-radius: 50%;
         background-color: #eee;
+
       }
     }
 
