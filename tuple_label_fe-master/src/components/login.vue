@@ -32,8 +32,8 @@
       return {
         // 数据绑定对象
         loginForm: {
-          username: 'hzw',
-          password: '123'
+          username: 'zht',
+          password: '123456'
         },
         // 验证规则对象
         loginFormRules: {
@@ -51,6 +51,7 @@
     },
     methods: {
       Login() {
+
         this.$router.replace('/management/project_list')
         // 预验证
         this.$refs.loginFormRef.validate(async valid => {
