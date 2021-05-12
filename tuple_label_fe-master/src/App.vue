@@ -3,7 +3,7 @@
     <link
       rel="shortcut icon"
       type="image/png"
-      href="./assets/logo.png"
+      href="assets/images/logo.png"
     >
     <!-- <div id="nav">
     </div> -->

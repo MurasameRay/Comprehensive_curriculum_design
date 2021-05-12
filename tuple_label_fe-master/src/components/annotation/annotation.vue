@@ -9,7 +9,7 @@
           <div class="layout-logo">
             <img
               type="image/png"
-              src="../../assets/head.png"
+              src="../../assets/images/head.png"
               width="50"
               height="40"
             >

@@ -3,7 +3,7 @@
     <div class="login_box" onmouseover="this.style.opacity=0.9" onmouseout="this.style.opacity=0.5">
       <!-- 头像区域 -->
       <div class="avatar_box">
-        <img src="../assets/logo.png" alt="" >
+        <img src="../assets/images/logo.png" alt="" >
       </div>
       <!-- 登录表单区域 -->
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
@@ -51,7 +51,6 @@
     },
     methods: {
       Login() {
-
         this.$router.replace('/management/project_list')
         // 预验证
         this.$refs.loginFormRef.validate(async valid => {
