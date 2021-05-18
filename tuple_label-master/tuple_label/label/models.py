@@ -50,3 +50,57 @@ class Document(models.Model):
         managed = True
         db_table = "label_document"
         app_label = 'label'
+
+class User(models.Model):
+    """用户信息表"""
+    project_id = models.ForeignKey(
+        Project,
+        db_column="project_id",
+        on_delete=models.CASCADE,
+    )
+    name = models.CharField(max_length=128)
+    account = models.CharField(max_length=20)
+    password = models.CharField(max_length=15)
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        managed = True
+        db_table = "lable_user"
+        app_label = 'label'
+
+class Admin(models.Model):
+    """管理员信息表"""
+    project_id = models.ForeignKey(
+        Project,
+        db_column="project_id",
+        on_delete=models.CASCADE,
+    )
+    name=models.CharField(max_length=255)
+    username = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
+    Belong=models.CharField(max_length=255)
+
+    class Meta:
+        managed = True
+        db_table = "lable_Admin"
+        app_label = 'label'
+
+class Admin_User(models.Model):
+    """角色信息表"""
+    admin_id = models.ForeignKey(
+        Admin,
+        db_column="admin_id",
+        on_delete=models.CASCADE,
+    )
+    user_id = models.ForeignKey(
+        User,
+        db_column="user_id",
+        on_delete=models.CASCADE,
+    )
+    admin_user_id=models.IntegerField()
+
+    class Meta:
+        managed = True
+        db_table = "lable_AdminUser"
+        app_label = 'label'

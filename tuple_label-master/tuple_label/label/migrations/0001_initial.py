@@ -80,4 +80,58 @@ class Migration(migrations.Migration):
             name='document_id',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='document_annotation', to='label.Document'),
         ),
+
+        migrations.CreateModel(
+            name='Admin',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=255)),
+                ('username', models.CharField(max_length=255)),
+                ('password', models.CharField(max_length=255)),
+                ('Belong', models.CharField(max_length=255)),
+            ],
+            options={
+                'db_table': 'lable_Admin',
+                'managed': True,
+            },
+        ),
+
+        migrations.CreateModel(
+            name='User',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=128)),
+                ('account', models.CharField(max_length=20)),
+                ('password', models.CharField(max_length=15)),
+                ('create_time', models.DateTimeField(auto_now_add=True)),
+                ('update_time', models.DateTimeField(auto_now=True)),
+                ('project_id', models.ForeignKey(db_column='project_id', on_delete=django.db.models.deletion.CASCADE,
+                                                 to='label.project')),
+            ],
+            options={
+                'db_table': 'lable_user',
+                'managed': True,
+            },
+        ),
+        migrations.CreateModel(
+            name='Admin_User',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('admin_user_id', models.IntegerField()),
+                ('admin_id', models.ForeignKey(db_column='admin_id', on_delete=django.db.models.deletion.CASCADE,
+                                               to='label.admin')),
+                ('user_id',
+                 models.ForeignKey(db_column='user_id', on_delete=django.db.models.deletion.CASCADE, to='label.user')),
+            ],
+            options={
+                'db_table': 'lable_AdminUser',
+                'managed': True,
+            },
+        ),
+        migrations.AddField(
+            model_name='admin',
+            name='project_id',
+            field=models.ForeignKey(db_column='project_id', on_delete=django.db.models.deletion.CASCADE,
+                                    to='label.project'),
+        ),
     ]
