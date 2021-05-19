@@ -26,14 +26,21 @@ class ProjectStatus(View):
 
 
 class Login(View):
-    def get(self,request):
-        username=request.GET["username"]
-        password=request.GET["password"]
+    def post(self,request):
+        body_dict=json.loads(request.body)
+        username=body_dict.get("username")
+        password=body_dict.get("password")
+        
+        print(username,' ',password)
         return JsonResponse(
-            {
+            {"username": username,
+             "password":password
+             }
 
-            }
+               , status=200
         )
+
+
 
 class ProjectImport(View):
     def post(self, request):
