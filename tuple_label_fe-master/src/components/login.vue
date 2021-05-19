@@ -18,7 +18,7 @@
         <!--        按钮区域-->
         <el-form-item class="btns">
           <el-button type="primary" @click="Login">登录</el-button>
-          <el-button type="info" @click="resetLoginForm">重置</el-button>
+          <el-button type="info" @click="Register">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -51,31 +51,46 @@
     },
     methods: {
       Login() {
-        this.$router.replace('/management/project_list')
         // 预验证
         this.$refs.loginFormRef.validate(async valid => {
           //未验证通过则直接return
           if (!valid) return;
           //不加await的化不会打印出数据，await只能用于async修饰的函数   //this.loginForm
-          const response = await this.$http.post('/login/',{username:"zht",password:123456} ).catch(() => this.$message.error("登录失败,请联系Tel:"))
+          const response = await this.$http.post('/login/',this.loginForm ).catch(() => this.$message.error("登录失败,请联系Tel:"))
           // {data:res}解构，将得到的返回值的data解构为res
           console.log(response.data)
           // console.log(res.meta.statusText)
           //从res的元数据中得到返回状态
           if (response.status !== 200) return;
-          if (response.data.token) return this.$message.success("登录成功")
+          if (response.data.token) {return this.$message.success("登录成功"),this.$router.replace('/management/project_list')}
           if (response.data.error) return this.$message.error(response.data.error)
         });
       },
       //重置登录表单
-      resetLoginForm() {
-        // console.log(this)
-        // ui框架自带的form表单方法
-        this.$refs.loginFormRef.resetFields();
-      }
-
+      // resetLoginForm() {
+      //   // console.log(this)
+      //   // ui框架自带的form表单方法
+      //   this.$refs.loginFormRef.resetFields();
+      // },
+     Register(){
+              // 预验证
+              this.$refs.loginFormRef.validate(async valid => {
+                //未验证通过则直接return
+                if (!valid) return;
+                //不加await的化不会打印出数据，await只能用于async修饰的函数   //this.loginForm
+                const response = await this.$http.post('/register/',this.loginForm ).catch(() => this.$message.error("注册失败,请联系Tel:"))
+                // {data:res}解构，将得到的返回值的data解构为res
+                console.log(response.data)
+                // console.log(res.meta.statusText)
+                //从res的元数据中得到返回状态
+                if (response.status !== 200) return;
+                if (response.data.token) {return this.$message.success("注册成功"),this.$router.replace('/management/project_list')}
+                if (response.data.error) return this.$message.error(response.data.error)
+              });
+            }
     }
   }
+
 </script>
 <!--加上scoped是将样式应用于此组件，不加是全局-->
 <style lang="less" scoped>

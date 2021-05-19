@@ -1,9 +1,13 @@
 import json
 
-from django.http import JsonResponse
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+
+from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import View
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
+
 
 import tuple_label.label.models
 from . import serializers
@@ -30,17 +34,56 @@ class Login(View):
         body_dict=json.loads(request.body)
         username=body_dict.get("username")
         password=body_dict.get("password")
-        
-        print(username,' ',password)
-        return JsonResponse(
-            {"username": username,
-             "password":password
-             }
+        # password = request.POST['password']
+        print(password)
+        user = authenticate(username=username, password=password)
+        user=1
+        print(user)
+        if user != None:
+            old_token = Token.objects.filter(user=user)
+            old_token.delete()
+            # 创建新的token并传递给前端
+            token = Token.objects.create(user=user)
+            print(token)
+            return JsonResponse({
+                "status": 200,
+                "message": "成功登录",
+                "token": token.key
+            })
+        else:
+            return JsonResponse({
+                "status": 201,
+                "message": "登录失败,请校验用户名或者密码",
+            })
 
-               , status=200
-        )
 
-
+class Register(View):
+    def post(self,request):
+        body_dict = json.loads(request.body)
+        username = body_dict.get("username")
+        password = body_dict.get("password")
+        # 校验注册，名字不可重复
+        user = User.objects.filter(username=username).first()
+        # 创建新的token并传递给前端
+        token = Token.objects.create(user=user)
+        print(token)
+        return JsonResponse({
+                "status": 200,
+                "message": "成功登录",
+                "token": token.key
+            })
+        #   info = '该用户名已被注册'
+        #   return render(request,'Myapp/ERROR.html',{'info':info})
+        # else:
+        #   # 注册成功，创建用户
+        #   User.objects.create_user(
+        #     username=username,
+        #     password=password
+        #   )
+        #   # 重定向到登录页面
+        #   return redirect('../login/')
+      # 注册失败，重新注册
+      # return render(request,'Myapp/register.html')
 
 class ProjectImport(View):
     def post(self, request):
