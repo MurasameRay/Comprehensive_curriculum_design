@@ -62,8 +62,15 @@
           // console.log(res.meta.statusText)
           //从res的元数据中得到返回状态
           if (response.status !== 200) return;
-          if (response.data.token) {return this.$message.success("登录成功"),this.$router.replace('/management/project_list')}
+          if (response.data.token) {
+             this.userToken = 'Bearer ' + response.data.data.body.token;
+          // 将用户token保存到vuex中
+             this.changeLogin({ Authorization: this.userToken });
+             this.$router.push('/management/project_list');
+             alert('登陆成功');
+          }
           if (response.data.error) return this.$message.error(response.data.error)
+
         });
       },
       //重置登录表单

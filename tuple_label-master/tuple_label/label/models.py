@@ -83,7 +83,7 @@ class Admin(models.Model):
 
     class Meta:
         managed = True
-        db_table = "lable_Admin"
+        db_table = "lable_admin"
         app_label = 'label'
 
 class Admin_User(models.Model):
@@ -102,5 +102,5 @@ class Admin_User(models.Model):
 
     class Meta:
         managed = True
-        db_table = "lable_AdminUser"
+        db_table = "lable_adminUser"
         app_label = 'label'
