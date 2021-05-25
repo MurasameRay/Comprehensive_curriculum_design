@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 //导入全局样式表
 import './assets/css/globe.css'
-
+import store from './store'
 Vue.config.productionTip = false
 Vue.use(iView);
 Vue.use(require('vue-shortkey'));
@@ -23,6 +23,7 @@ Vue.prototype.$http = axios
 
 new Vue({
   router,
+    store,
   render: h => h(App)
 }).$mount('#app')
 

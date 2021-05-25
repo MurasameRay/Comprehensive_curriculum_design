@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 #    "label.apps.LabelConfig",
     'rest_framework',
     'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [

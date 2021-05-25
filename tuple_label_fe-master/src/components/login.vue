@@ -26,7 +26,7 @@
 </template>
 
 <script>
-
+import { mapMutations } from 'vuex';
   export default {
     data() {
       return {
@@ -50,24 +50,24 @@
       }
     },
     methods: {
-      Login() {
+      ...mapMutations(['changeLogin']),
+      Login: function () {
         // 预验证
         this.$refs.loginFormRef.validate(async valid => {
           //未验证通过则直接return
           if (!valid) return;
           //不加await的化不会打印出数据，await只能用于async修饰的函数   //this.loginForm
-          const response = await this.$http.post('/login/',this.loginForm ).catch(() => this.$message.error("登录失败,请联系Tel:"))
+          const response = await this.$http.post('/login/', this.loginForm).catch(() => this.$message.error("登录失败,请联系Tel:"))
           // {data:res}解构，将得到的返回值的data解构为res
           console.log(response.data)
           // console.log(res.meta.statusText)
           //从res的元数据中得到返回状态
           if (response.status !== 200) return;
           if (response.data.token) {
-             this.userToken = 'Bearer ' + response.data.data.body.token;
-          // 将用户token保存到vuex中
-             this.changeLogin({ Authorization: this.userToken });
-             this.$router.push('/management/project_list');
-             alert('登陆成功');
+            this.userToken = 'Ray ' + response.data.token;
+            // 将用户token保存到vuex中
+            this.changeLogin({Authorization: this.userToken});
+            this.$router.push('/management/project_list');
           }
           if (response.data.error) return this.$message.error(response.data.error)
 

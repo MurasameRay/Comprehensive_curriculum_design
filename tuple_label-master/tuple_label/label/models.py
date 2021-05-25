@@ -102,5 +102,5 @@ class Admin_User(models.Model):
 
     class Meta:
         managed = True
-        db_table = "lable_adminUser"
+        db_table = "lable_adminuser"
         app_label = 'label'
