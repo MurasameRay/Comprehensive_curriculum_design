@@ -1,5 +1,5 @@
 import json
-
+from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
@@ -37,7 +37,7 @@ class Login(View):
         # password = request.POST['password']
         print(password)
         user = authenticate(username=username, password=password)
-        user=1
+
         print(user)
         if user != None:
             old_token = Token.objects.filter(user=user)
@@ -62,9 +62,14 @@ class Register(View):
         body_dict = json.loads(request.body)
         username = body_dict.get("username")
         password = body_dict.get("password")
+        print(username,"+",password)
         # 校验注册，名字不可重复
         user = User.objects.filter(username=username).first()
         # 创建新的token并传递给前端
+        user=User.objects.create_user(
+                username=username,
+                password=password
+              )
         token = Token.objects.create(user=user)
         print(token)
         return JsonResponse({
