@@ -16,9 +16,10 @@
             >
           </div>
           <div class="layout-nav">
-            <!-- <MenuItem name="1">
-            <Icon type="ios-paper"></Icon> Introduction
-            </MenuItem> -->
+            <MenuItem name="1">
+            <Icon type="ios-paper"></Icon>
+              用户名：
+            </MenuItem>
           </div>
         </Menu>
       </Header>
