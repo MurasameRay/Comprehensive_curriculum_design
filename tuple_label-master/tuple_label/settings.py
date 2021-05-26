@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 #    "label.apps.LabelConfig",
     'rest_framework',
     'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

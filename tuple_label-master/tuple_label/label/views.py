@@ -63,6 +63,14 @@ class Register(View):
         username = body_dict.get("username")
         password = body_dict.get("password")
         print(username,"+",password)
+        #添加至数据库
+        project_id = tuple_label.label.models.Project.objects.get(id=1)
+        tuple_label.label.models.Admin.objects.create(
+            username=username,
+            password=password,
+            project_id=project_id
+        )
+
         # 校验注册，名字不可重复
         user = User.objects.filter(username=username).first()
         # 创建新的token并传递给前端
