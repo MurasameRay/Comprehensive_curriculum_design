@@ -41,5 +41,7 @@ urlpatterns = [
     path("api/project_export/", views.ProjectExport.as_view()),
     path("api/login/",views.Login.as_view()),
     path("api/register/",views.Register.as_view()),
+    path("api/user/", views.UserList.as_view()),
+    path("api/user/<int:pk>/", views.UserDetail.as_view()),
     path("", views.ProjectList.as_view()),
 ]

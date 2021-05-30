@@ -95,7 +95,7 @@ export default {
           key: "shortcut"
         },
         {
-          title: "Backgroud Color",
+          title: "Background Color",
           key: "background_color"
         },
         {

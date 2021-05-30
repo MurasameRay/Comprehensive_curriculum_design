@@ -153,3 +153,15 @@ class ProjectList(generics.ListCreateAPIView):
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = tuple_label.label.models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
+
+
+class UserList(generics.ListCreateAPIView):
+    queryset = tuple_label.label.models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = tuple_label.label.models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+
