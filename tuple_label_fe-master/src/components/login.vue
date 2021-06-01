@@ -50,7 +50,7 @@ import { mapMutations } from 'vuex';
       }
     },
     methods: {
-      ...mapMutations(['changeLogin']),
+      ...mapMutations(['changeLogin','removeStorage']),
       Login: function () {
         // 预验证
         this.$refs.loginFormRef.validate(async valid => {
@@ -62,15 +62,16 @@ import { mapMutations } from 'vuex';
           console.log(response.data)
           // console.log(res.meta.statusText)
           //从res的元数据中得到返回状态
-          if (response.status !== 200) return;
+          if (response.status !== 200) {return;}
           if (response.data.token) {
             this.userToken = 'Ray ' + response.data.token;
+            // token = localStorage.getItem('Authorization');
             // 将用户token保存到vuex中
             this.changeLogin({Authorization: this.userToken});
             this.$router.push('/management/project_list');
           }
-          if (response.data.error) return this.$message.error(response.data.error)
-
+          else this.removeStorage();
+          if (response.data.error) {return this.$message.error(response.data.error)}
         });
       },
       //重置登录表单
@@ -90,9 +91,21 @@ import { mapMutations } from 'vuex';
                 console.log(response.data)
                 // console.log(res.meta.statusText)
                 //从res的元数据中得到返回状态
-                if (response.status !== 200) return;
-                if (response.data.token) {return this.$message.success("注册成功"),this.$router.replace('/management/project_list')}
-                if (response.data.error) return this.$message.error(response.data.error)
+                if (response.status !== 200) {return;}
+                if (response.data.token) {
+                  this.userToken = 'Ray ' + response.data.token;
+                  // token = localStorage.getItem('Authorization');
+                  // 将用户token保存到vuex中
+                  this.changeLogin({Authorization: this.userToken});
+                  this.$router.push({
+                    name:'/management/project_list',
+                    params:{
+                      id:1
+                    }
+                  });
+                }
+                else this.removeStorage();
+                if (response.data.error) {return this.$message.error(response.data.error)}
               });
             }
     }

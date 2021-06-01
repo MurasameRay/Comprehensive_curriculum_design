@@ -15,11 +15,15 @@
               height="40"
             >
           </div>
-          <div class="layout-nav">
-            <!-- <MenuItem name="1">
-            <Icon type="ios-paper"></Icon> Introduction
-            </MenuItem> -->
-          </div>
+
+
+             <el-breadcrumb-item>
+               <div class="layout-nav">
+                 用户名：
+                zht
+               </div>
+            </el-breadcrumb-item>
+
         </Menu>
       </Header>
       <Layout>
@@ -63,7 +67,70 @@
   </div>
 </template>
 <script>
-export default {};
+  const axios = require("axios");
+  import urlSetting from "../setting";
+  export default {
+  data() {
+    return {
+      showEditModal: false,
+      showAddModal: false,
+      queryData: {},
+      columns1: [
+        {
+          title: "ID",
+          key: "id",
+          _display: false
+        },
+        {
+          title: "Username",
+          key: "username"
+        },
+        {
+          title: "Project Id",
+          key: "project_id"
+        },
+        {
+          title: "Name",
+          key: "name"
+        },
+        {
+          title: "Password",
+          key: "password"
+        },
+      ],
+      data1: [],
+      editData: {
+        id: "",
+        username: "",
+        name:"",
+        password:"",
+        project_id: "",
+      },
+      createProjectOption: {
+        isShow: false
+      }
+    };
+  },
+  mounted() {
+    this.search();
+  },
+  methods: {
+    search() {
+      axios
+        .get(urlSetting.username_url)
+        .then(response => {
+          console.log(response);
+          if (response.status === 200) {
+            this.data1 = response.data.results;
+          }
+        })
+        .catch(error => {
+          this.$Message.error(error.toString());
+        });
+    },
+
+  },
+};
 </script>
 
 
@@ -79,7 +146,6 @@ export default {};
 .layout-logo {
   width: 100px;
   height: 30px;
-  background: #5b6270;
   border-radius: 3px;
   float: left;
   position: relative;
@@ -87,8 +153,11 @@ export default {};
   left: 20px;
 }
 .layout-nav {
-  width: 420px;
+  float: right;
+  padding-left: 800px;
+  width: 1000px;
   margin: 0 auto;
   margin-right: 20px;
+  color:red;
 }
 </style>
