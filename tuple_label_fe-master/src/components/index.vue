@@ -20,7 +20,7 @@
              <el-breadcrumb-item>
                <div class="layout-nav">
                  用户名：
-                zht
+                 {{showUserName}}
                </div>
             </el-breadcrumb-item>
 
@@ -111,13 +111,18 @@
       }
     };
   },
+  computed:{
+    showUserName(){
+        return  localStorage.getItem('Username');
+    }
+  },
   mounted() {
     this.search();
   },
-  methods: {
+  methods: {  
     search() {
       axios
-        .get(urlSetting.username_url)
+        .get(urlSetting.username_url+this.$router.username+'/')
         .then(response => {
           console.log(response);
           if (response.status === 200) {
