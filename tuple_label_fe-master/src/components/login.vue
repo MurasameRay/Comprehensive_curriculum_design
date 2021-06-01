@@ -97,7 +97,12 @@ import { mapMutations } from 'vuex';
                   // token = localStorage.getItem('Authorization');
                   // 将用户token保存到vuex中
                   this.changeLogin({Authorization: this.userToken});
-                  this.$router.push('/management/project_list');
+                  this.$router.push({
+                    name:'/management/project_list',
+                    params:{
+                      id:1
+                    }
+                  });
                 }
                 else this.removeStorage();
                 if (response.data.error) {return this.$message.error(response.data.error)}

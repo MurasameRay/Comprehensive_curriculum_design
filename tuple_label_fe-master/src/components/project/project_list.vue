@@ -144,6 +144,7 @@ export default {
         id: "",
         name: "",
         description: ""
+
       },
       createProjectOption: {
         isShow: false
@@ -156,7 +157,7 @@ export default {
   methods: {
     search() {
       axios
-        .get(urlSetting.project_url)
+        .get(urlSetting.project_url+this.$route.params.username+"/")
         .then(response => {
           console.log(response);
           if (response.status === 200) {

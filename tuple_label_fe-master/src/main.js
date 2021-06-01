@@ -39,3 +39,26 @@ axios.interceptors.request.use(
   error => {
     return Promise.reject(error);
   });
+
+
+//http reponse拦截器
+
+axios.interceptors.response.use(
+  response =>{
+    return response;
+  },
+  error=>{
+    if(error.response){
+      switch(error.response.status){
+        case 201:
+          localStorage.removeItem('Authorization');
+     /*     router.push('/views/login');*/
+          router.replace({
+            path: '/login',
+            query: {redirect: router.currentRoute.fullPath}//登录成功后跳入浏览的当前页面
+          })
+      }
+    }
+
+  }
+)
