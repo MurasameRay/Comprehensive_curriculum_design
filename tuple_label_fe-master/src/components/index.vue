@@ -17,12 +17,7 @@
           </div>
 
 
-             <el-breadcrumb-item>
-               <div class="layout-nav">
-                 用户名：
-                 {{showUserName}}
-               </div>
-            </el-breadcrumb-item>
+             
 
         </Menu>
       </Header>
@@ -122,7 +117,7 @@
   methods: {  
     search() {
       axios
-        .get(urlSetting.username_url+this.$router.username+'/')
+        .get(urlSetting.username_url)
         .then(response => {
           console.log(response);
           if (response.status === 200) {

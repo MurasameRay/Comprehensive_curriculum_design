@@ -157,7 +157,7 @@ export default {
   methods: {
     search() {
       axios
-        .get(urlSetting.project_url+this.$route.params.username+"/")
+        .get(urlSetting.project_url)
         .then(response => {
           console.log(response);
           if (response.status === 200) {
