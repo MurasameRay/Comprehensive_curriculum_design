@@ -15,13 +15,15 @@
               height="40"
             >
           </div>
-          <div class="layout-nav">
-            <MenuItem name="1">
-            <Icon type="ios-paper"></Icon>
-              用户名：
-              <Input v-model="editData.name" />
-            </MenuItem>
-          </div>
+
+
+             <el-breadcrumb-item>
+               <div class="layout-nav">
+                 用户名：
+                zht
+               </div>
+            </el-breadcrumb-item>
+
         </Menu>
       </Header>
       <Layout>
@@ -80,16 +82,16 @@
           _display: false
         },
         {
-          title: "Name",
-          key: "name"
+          title: "Username",
+          key: "username"
         },
         {
           title: "Project Id",
           key: "project_id"
         },
         {
-          title: "Account",
-          key: "account"
+          title: "Name",
+          key: "name"
         },
         {
           title: "Password",
@@ -99,8 +101,8 @@
       data1: [],
       editData: {
         id: "",
-        name: "",
-        account:"",
+        username: "",
+        name:"",
         password:"",
         project_id: "",
       },
@@ -144,7 +146,6 @@
 .layout-logo {
   width: 100px;
   height: 30px;
-  background: #5b6270;
   border-radius: 3px;
   float: left;
   position: relative;
@@ -152,8 +153,11 @@
   left: 20px;
 }
 .layout-nav {
-  width: 420px;
+  float: right;
+  padding-left: 800px;
+  width: 1000px;
   margin: 0 auto;
   margin-right: 20px;
+  color:red;
 }
 </style>
