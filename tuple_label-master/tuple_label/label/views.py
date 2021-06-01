@@ -60,14 +60,14 @@ class Login(View):
 class Register(View):
     def post(self,request):
         body_dict = json.loads(request.body)
-        username = body_dict.get("username")
         password = body_dict.get("password")
-        print(username,"+",password)
+        username = body_dict.get("username")
+        print(username, "+", password)
         #添加至数据库
         project_id = tuple_label.label.models.Project.objects.get(id=1)
-        tuple_label.label.models.Admin.objects.create(
-            username=username,
+        tuple_label.label.models.User.objects.create(
             password=password,
+            username=username,
             project_id=project_id
         )
 
@@ -153,3 +153,15 @@ class ProjectList(generics.ListCreateAPIView):
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = tuple_label.label.models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
+
+
+class UserList(generics.ListCreateAPIView):
+    queryset = tuple_label.label.models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = tuple_label.label.models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+
