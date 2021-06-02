@@ -5,10 +5,10 @@
       <Button
         @click="createProjectOption.isShow = true"
         type="success"
-      >新增项目</Button>
+      >新增标注员</Button>
       </Col>
     </Row>
-
+	
     <Table
       highlight-row
       :columns="columns1"
@@ -54,7 +54,7 @@
 <script>
 const axios = require("axios");
 import urlSetting from "../../setting";
-import CreateProject from "./create_project";
+import CreateProject from "../project/create_project";
 export default {
   data() {
     return {

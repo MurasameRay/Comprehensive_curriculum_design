@@ -12,6 +12,7 @@ import project_base from '../components/project/project_base'
 import project_list from '../components/project/project_list'
 import project_status from '../components/project/project_status'
 import login from "../components/login";
+import user_manage from '../components/manage/user_manage'
 
 Vue.use(VueRouter)
 
@@ -35,7 +36,7 @@ const routes = [
     children: [
       {
         path: 'project_list',
-        component: project_list
+        component: project_list,
       },
       {
         path: 'create_project',
@@ -45,6 +46,10 @@ const routes = [
         path: 'label_list',
         component: label_list
       },
+	  {
+	    path: 'manage',
+	    component: user_manage
+	  },
       {
         path: 'create_label',
         component: create_label
@@ -80,7 +85,7 @@ const routes = [
   {
     path: '/annotation/:id/',
     component: annotation
-  }
+  },
 ]
 
 const router = new VueRouter({
