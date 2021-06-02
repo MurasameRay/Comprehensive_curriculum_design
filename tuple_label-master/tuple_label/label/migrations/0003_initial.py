@@ -94,8 +94,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Admin_User',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('admin_user_id', models.IntegerField()),
+                ('admin_user_id', models.IntegerField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('admin_id', models.ForeignKey(db_column='admin_id', on_delete=django.db.models.deletion.CASCADE, to='label.admin')),
                 ('user_id', models.ForeignKey(db_column='user_id', on_delete=django.db.models.deletion.CASCADE, to='label.user')),
             ],

@@ -31,7 +31,7 @@
             v-model="editData.id"
           />
         </FormItem>
-        <FormItem label="Project Name">
+        <FormItem label="Signer Name">
           <Input v-model="editData.name" />
         </FormItem>
         <FormItem label="Description">
@@ -42,7 +42,7 @@
 
     <Modal
       v-model="createProjectOption.isShow"
-      title="新建项目"
+      title="新增标注员"
       @on-ok="createProjectOk"
       @on-cancel="createProjectOption.isShow = false"
     >
@@ -54,7 +54,7 @@
 <script>
 const axios = require("axios");
 import urlSetting from "../../setting";
-import CreateProject from "../project/create_project";
+import CreateProject from "../project/create_signer";
 export default {
   data() {
     return {
@@ -65,7 +65,7 @@ export default {
           key: "id"
         },
         {
-          title: "Project Name",
+          title: "Signer Name",
           key: "name"
         },
         {
@@ -80,52 +80,7 @@ export default {
           // 编辑和删除按钮
           render: (h, params) => {
             return h("div", [
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "default",
-                    to: `/project/${params.row.id}/documents`
-                  },
-                  style: {
-                    marginRight: "5px"
-                  }
-                },
-                "详情"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "default"
-                  },
-                  on: {
-                    click: () => {
-                      this.editProject(params.row);
-                    }
-                  }
-                },
-                "编辑"
-              ),
-
-			h(
-			  "Button",
-			  {
-			    props: {
-			      type: "success",
-			      size: "default",
-			      to: `/management/manage`
-			    },
-
-			  },
-			  "管理"
-			),
-
-
-
-
+             
               h(
                 "Button",
                 {
@@ -141,17 +96,7 @@ export default {
                 },
                 "删除"
               ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "success",
-                    size: "default",
-                    to: `/annotation/${params.row.id}`
-                  }
-                },
-                "开始标注"
-              )
+         
             ]);
           }
         }
@@ -185,21 +130,7 @@ export default {
         });
     },
 
-    editProject(row) {
-      axios
-        .get(urlSetting.project_url + row.id + "/")
-        .then(response => {
-          if (response.status === 200) {
-            this.editData = response.data;
-          }
-        })
-        .catch(error => {
-          this.$Message.error(error.toString());
-        })
-        .then(() => {});
-
-      this.showEditModal = true;
-    },
+    
 	
 	editManage(row) {
 	  axios

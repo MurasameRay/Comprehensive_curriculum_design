@@ -126,6 +126,22 @@ export default {
                 },
                 "删除"
               ),
+			  h(
+			    "Button",
+			    {
+			      props: {
+			        type: "success",
+			        size: "default",
+			        to: `/management/manage`
+			      },
+			  
+			    },
+			    "管理"
+			  ),
+			  
+			  
+			  
+			  
             ]);
           }
         }

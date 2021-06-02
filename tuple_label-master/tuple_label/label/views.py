@@ -160,6 +160,8 @@ class ProjectList(generics.ListCreateAPIView):
     serializer_class = serializers.ProjectSerializer
 
 
+
+
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = tuple_label.label.models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
