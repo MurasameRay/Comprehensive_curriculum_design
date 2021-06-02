@@ -5,10 +5,10 @@
       <Button
         @click="createProjectOption.isShow = true"
         type="success"
-      >新增项目</Button>
+      >新增标注员</Button>
       </Col>
     </Row>
-
+	
     <Table
       highlight-row
       :columns="columns1"
@@ -31,7 +31,7 @@
             v-model="editData.id"
           />
         </FormItem>
-        <FormItem label="Project Name">
+        <FormItem label="Signer Name">
           <Input v-model="editData.name" />
         </FormItem>
         <FormItem label="Description">
@@ -42,7 +42,7 @@
 
     <Modal
       v-model="createProjectOption.isShow"
-      title="新建项目"
+      title="新增标注员"
       @on-ok="createProjectOk"
       @on-cancel="createProjectOption.isShow = false"
     >
@@ -54,7 +54,7 @@
 <script>
 const axios = require("axios");
 import urlSetting from "../../setting";
-import CreateProject from "./create_project";
+import CreateProject from "../project/create_signer";
 export default {
   data() {
     return {
@@ -65,7 +65,7 @@ export default {
           key: "id"
         },
         {
-          title: "Project Name",
+          title: "Signer Name",
           key: "name"
         },
         {
@@ -80,35 +80,7 @@ export default {
           // 编辑和删除按钮
           render: (h, params) => {
             return h("div", [
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "default",
-                    to: `/project/${params.row.id}/documents`
-                  },
-                  style: {
-                    marginRight: "5px"
-                  }
-                },
-                "详情"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "default"
-                  },
-                  on: {
-                    click: () => {
-                      this.editProject(params.row);
-                    }
-                  }
-                },
-                "编辑"
-              ),
+             
               h(
                 "Button",
                 {
@@ -124,17 +96,7 @@ export default {
                 },
                 "删除"
               ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "success",
-                    size: "default",
-                    to: `/annotation/${params.row.id}`
-                  }
-                },
-                "开始标注"
-              )
+         
             ]);
           }
         }
@@ -144,7 +106,6 @@ export default {
         id: "",
         name: "",
         description: ""
-
       },
       createProjectOption: {
         isShow: false
@@ -169,6 +130,7 @@ export default {
         });
     },
 
+<<<<<<< HEAD:tuple_label_fe-master/src/components/project/project_list.vue
     editProject(row) {
       axios
         .get(urlSetting.project_url + row.id + "/")
@@ -183,6 +145,27 @@ export default {
         .then(() => {});
       this.showEditModal = true;
     },
+=======
+    
+	
+	editManage(row) {
+	  axios
+	    .get(urlSetting.project_url + row.id + "/")
+	    .then(response => {
+	      if (response.status === 200) {
+	        this.editData = response.data;
+	      }
+	    })
+	    .catch(error => {
+	      this.$Message.error(error.toString());
+	    })
+	    .then(() => {});
+	
+	  this.showEditModal = true;
+	},
+	
+	
+>>>>>>> 5a6ed907c17e88b21bf795f897b1d79abcfee9ff:tuple_label_fe-master/src/components/manage/user_manage.vue
     deleteProject(row) {
       axios
         .delete(urlSetting.project_url + row.id + "/")

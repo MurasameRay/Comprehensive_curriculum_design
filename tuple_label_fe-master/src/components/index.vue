@@ -192,5 +192,8 @@
   margin: 0 auto;
   margin-right: 20px;
   color:red;
+  font-size: 20px;
+  font-family: FangSong;
+  text-shadow: 2px 2px 2px grey;
 }
 </style>
