@@ -2,10 +2,7 @@
   <div>
     <Row>
       <Col span="1">
-      <Button
-        @click="createProjectOption.isShow = true"
-        type="success"
-      >新增项目</Button>
+
       </Col>
     </Row>
 
@@ -40,14 +37,7 @@
       </Form>
     </Modal>
 
-    <Modal
-      v-model="createProjectOption.isShow"
-      title="新建项目"
-      @on-ok="createProjectOk"
-      @on-cancel="createProjectOption.isShow = false"
-    >
-      <CreateProject ref="CreateProject"></CreateProject>
-    </Modal>
+    
   </div>
 
 </template>

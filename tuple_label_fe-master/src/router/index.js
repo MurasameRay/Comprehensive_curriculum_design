@@ -9,9 +9,8 @@ import create_project from '../components/project/create_project'
 import data_export from '../components/project/data_export'
 import data_import from '../components/project/data_import'
 import project_base from '../components/project/project_base'
-// import project_list_manager from '../components/project/project_list_manager'
-import project_list from '../components/project/project_list'
-// import project_list_signer from '../components/project/project_list_signer'
+import project_list_manager from '../components/project/project_list_manager'
+import project_list_signer from '../components/project/project_list_signer'
 import project_status from '../components/project/project_status'
 import login from "../components/login";
 
@@ -35,10 +34,16 @@ const routes = [
     path: '/management/',
     component: index,
     children: [
-      {
-      path: 'project_list',
-      component: project_list
-      },
+	  {
+	  path: 'project_list_signer',
+	  component: project_list_signer
+	  },
+	  
+	  {
+	  path: 'project_list_manager',
+	  component: project_list_manager
+	  },
+	  
       {
         path: 'create_project',
         component: create_project
