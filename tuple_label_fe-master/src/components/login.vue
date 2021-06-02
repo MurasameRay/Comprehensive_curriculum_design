@@ -67,6 +67,7 @@ import { mapMutations } from 'vuex';
             this.userToken = 'Ray ' + response.data.token;
             // token = localStorage.getItem('Authorization');
             // 将用户token保存到vuex中
+            localStorage.setItem('username', this.loginForm.username);
             this.changeLogin({Authorization: this.userToken});
             this.$router.push({
               path:'/management/project_list',
@@ -101,6 +102,7 @@ import { mapMutations } from 'vuex';
                   this.userToken = 'Ray ' + response.data.token;
                   // token = localStorage.getItem('Authorization');
                   // 将用户token保存到vuex中
+                  localStorage.setItem('username', this.loginForm.username);
                   this.changeLogin({Authorization: this.userToken});
                   this.$router.push({
                     path:'/management/project_list',

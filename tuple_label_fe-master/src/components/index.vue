@@ -17,7 +17,12 @@
           </div>
 
 
-             
+             <el-breadcrumb-item>
+               <div class="layout-nav">
+                 用户名：
+                 {{showUserName}}
+               </div>
+            </el-breadcrumb-item>
 
         </Menu>
       </Header>
@@ -64,6 +69,7 @@
 <script>
   const axios = require("axios");
   import urlSetting from "../setting";
+
   export default {
   data() {
     return {
@@ -108,7 +114,7 @@
   },
   computed:{
     showUserName(){
-        return  localStorage.getItem('Username');
+        return localStorage.getItem('username');
     }
   },
   mounted() {
@@ -128,7 +134,19 @@
           this.$Message.error(error.toString());
         });
     },
-
+    findUser() {
+      axios
+        .get(urlSetting.username_url+"zht"+'/')
+        .then(response => {
+          console.log(response);
+          if (response.status === 200) {
+            this.data1 = response.data.results;
+          }
+        })
+        .catch(error => {
+          this.$Message.error(error.toString());
+        });
+    },
   },
 };
 </script>
