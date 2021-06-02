@@ -98,6 +98,16 @@ class Register(View):
       # 注册失败，重新注册
       # return render(request,'Myapp/register.html')
 
+# class User(View):
+#     def get(self, request):
+#         username = request.GET["username"]
+#         print(username)
+#         User_by_username = tuple_label.label.models.User.objects.filter(username=username)
+#         serializer = serializers.UserSerializer(User_by_username, many=True)
+#         return JsonResponse(serializer.data, safe=False)
+
+
+
 class ProjectImport(View):
     def post(self, request):
         try:
