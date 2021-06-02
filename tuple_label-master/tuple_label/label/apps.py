@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class LabelConfig(AppConfig):
-    name = 'label'
+    name = 'tuple_label.label'

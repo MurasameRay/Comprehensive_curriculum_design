@@ -2,10 +2,7 @@
   <div>
     <Row>
       <Col span="1">
-      <Button
-        @click="createProjectOption.isShow = true"
-        type="success"
-      >新增项目</Button>
+
       </Col>
     </Row>
 
@@ -40,21 +37,17 @@
       </Form>
     </Modal>
 
-    <Modal
-      v-model="createProjectOption.isShow"
-      title="新建项目"
-      @on-ok="createProjectOk"
-      @on-cancel="createProjectOption.isShow = false"
-    >
-      <CreateProject ref="CreateProject"></CreateProject>
-    </Modal>
+    
   </div>
 
 </template>
 <script>
+	
 const axios = require("axios");
 import urlSetting from "../../setting";
 import CreateProject from "./create_project";
+
+
 export default {
   data() {
     return {
@@ -84,67 +77,6 @@ export default {
                 "Button",
                 {
                   props: {
-                    type: "primary",
-                    size: "default",
-                    to: `/project/${params.row.id}/documents`
-                  },
-                  style: {
-                    marginRight: "5px"
-                  }
-                },
-                "详情"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "default"
-                  },
-                  on: {
-                    click: () => {
-                      this.editProject(params.row);
-                    }
-                  }
-                },
-                "编辑"
-              ),
-
-			h(
-			  "Button",
-			  {
-			    props: {
-			      type: "success",
-			      size: "default",
-			      to: `/management/manage`
-			    },
-
-			  },
-			  "管理"
-			),
-
-
-
-
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "error",
-                    size: "default"
-                  },
-                  on: {
-                    click: () => {
-                      this.doDelete(params.row);
-                    }
-                  }
-                },
-                "删除"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
                     type: "success",
                     size: "default",
                     to: `/annotation/${params.row.id}`
@@ -161,7 +93,6 @@ export default {
         id: "",
         name: "",
         description: ""
-
       },
       createProjectOption: {
         isShow: false
@@ -185,7 +116,7 @@ export default {
           this.$Message.error(error.toString());
         });
     },
-
+	
     editProject(row) {
       axios
         .get(urlSetting.project_url + row.id + "/")
@@ -201,22 +132,7 @@ export default {
 
       this.showEditModal = true;
     },
-	
-	editManage(row) {
-	  axios
-	    .get(urlSetting.project_url + row.id + "/")
-	    .then(response => {
-	      if (response.status === 200) {
-	        this.editData = response.data;
-	      }
-	    })
-	    .catch(error => {
-	      this.$Message.error(error.toString());
-	    })
-	    .then(() => {});
-	
-	  this.showEditModal = true;
-	},
+	// 测试获取是否为管理员
 	
 	
     deleteProject(row) {

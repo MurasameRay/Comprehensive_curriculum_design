@@ -62,10 +62,10 @@ class Register(View):
         body_dict = json.loads(request.body)
         username = body_dict.get("username")
         password = body_dict.get("password")
-        print(username,"+",password)
+        print(username, "+", password)
         #添加至数据库
         project_id = tuple_label.label.models.Project.objects.get(id=1)
-        tuple_label.label.models.Admin.objects.create(
+        tuple_label.label.models.User.objects.create(
             username=username,
             password=password,
             project_id=project_id
@@ -97,6 +97,16 @@ class Register(View):
         #   return redirect('../login/')
       # 注册失败，重新注册
       # return render(request,'Myapp/register.html')
+
+# class User(View):
+#     def get(self, request):
+#         username = request.GET["username"]
+#         print(username)
+#         User_by_username = tuple_label.label.models.User.objects.filter(username=username)
+#         serializer = serializers.UserSerializer(User_by_username, many=True)
+#         return JsonResponse(serializer.data, safe=False)
+
+
 
 class ProjectImport(View):
     def post(self, request):
@@ -153,3 +163,15 @@ class ProjectList(generics.ListCreateAPIView):
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = tuple_label.label.models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
+
+
+class UserList(generics.ListCreateAPIView):
+    queryset = tuple_label.label.models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = tuple_label.label.models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+

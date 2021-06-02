@@ -3,11 +3,12 @@
     <Row>
       <Col span="1">
       <Button
-        @click="showAddModal = true"
+        @click="createProjectOption.isShow = true"
         type="success"
-      >新增标签</Button>
+      >新增项目</Button>
       </Col>
     </Row>
+
     <Table
       highlight-row
       :columns="columns1"
@@ -16,9 +17,9 @@
 
     <Modal
       v-model="showEditModal"
-      title="编辑标签"
-      @on-ok="editLabelOk"
-      @on-cancel="editLabelCancel"
+      title="编辑项目"
+      @on-ok="ok"
+      @on-cancel="cancel"
     >
       <Form
         :model="editData"
@@ -30,100 +31,53 @@
             v-model="editData.id"
           />
         </FormItem>
-        <FormItem label="Project ID">
-          <Input v-model="editData.project_id" />
-        </FormItem>
-        <FormItem label="Name">
+        <FormItem label="Project Name">
           <Input v-model="editData.name" />
         </FormItem>
-        <FormItem label="Shortcut">
-          <Input v-model="editData.shortcut" />
+        <FormItem label="Description">
+          <Input v-model="editData.description" />
         </FormItem>
-        <FormItem label="Backgroud Color">
-          <ColorPicker
-            v-model="editData.background_color"
-            size="default"
-          />
-        </FormItem>
-        <FormItem label="Text Color">
-          <ColorPicker
-            v-model="editData.text_color"
-            size="default"
-          />
-        </FormItem>
-
       </Form>
     </Modal>
 
     <Modal
-      v-model="showAddModal"
-      title="新增标签"
-      @on-ok="addLabelOk"
-      @on-cancel="addLabelCancel"
+      v-model="createProjectOption.isShow"
+      title="新建项目"
+      @on-ok="createProjectOk"
+      @on-cancel="createProjectOption.isShow = false"
     >
-      <CreateLabel ref="CreateLabel"></CreateLabel>
+      <CreateProject ref="CreateProject"></CreateProject>
     </Modal>
   </div>
 
 </template>
 <script>
+	
 const axios = require("axios");
 import urlSetting from "../../setting";
-import CreateLabel from "./create_label";
+import CreateProject from "./create_project";
+
 export default {
   data() {
     return {
       showEditModal: false,
-      showAddModal: false,
-      queryData: {},
       columns1: [
         {
           title: "ID",
-          key: "id",
-          _display: false
+          key: "id"
         },
         {
-          title: "Project Id",
-          key: "project_id"
-        },
-        {
-          title: "Name",
+          title: "Project Name",
           key: "name"
         },
         {
-          title: "Shortcut",
-          key: "shortcut"
-        },
-        {
-          title: "Background Color",
-          key: "background_color"
-        },
-        {
-          title: "Text Color",
-          key: "text_color"
-        },
-        {
-          title: "示例",
-          key: "example",
-          render: (h, params) => {
-            const row = params.row;
-            const background_color = row.background_color;
-            const text_color = text_color;
-            return h(
-              "Tag",
-              {
-                props: {
-                  color: background_color
-                }
-              },
-              row.name
-            );
-          }
+          title: "Description",
+          key: "description"
         },
         {
           title: "操作",
           key: "action",
-          width: 200,
+          width: 400,
           align: "center",
           // 编辑和删除按钮
           render: (h, params) => {
@@ -133,14 +87,25 @@ export default {
                 {
                   props: {
                     type: "primary",
-                    size: "default"
+                    size: "default",
+                    to: `/project/${params.row.id}/documents`
                   },
                   style: {
                     marginRight: "5px"
+                  }
+                },
+                "详情"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "primary",
+                    size: "default"
                   },
                   on: {
                     click: () => {
-                      this.editLabel(params.row);
+                      this.editProject(params.row);
                     }
                   }
                 },
@@ -155,12 +120,12 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.deleteLabel(params.row);
+                      this.doDelete(params.row);
                     }
                   }
                 },
                 "删除"
-              )
+              ),
             ]);
           }
         }
@@ -168,11 +133,11 @@ export default {
       data1: [],
       editData: {
         id: "",
-        project_id: "",
         name: "",
-        shortcut: "",
-        background_color: "",
-        text_color: ""
+        description: ""
+      },
+      createProjectOption: {
+        isShow: false
       }
     };
   },
@@ -182,7 +147,7 @@ export default {
   methods: {
     search() {
       axios
-        .get(`${urlSetting.label_url}?project_id=${this.$route.params.id}`)
+        .get(urlSetting.project_url)
         .then(response => {
           console.log(response);
           if (response.status === 200) {
@@ -191,13 +156,12 @@ export default {
         })
         .catch(error => {
           this.$Message.error(error.toString());
-        })
-        .then(() => {});
+        });
     },
-
-    editLabel(row) {
+	
+    editProject(row) {
       axios
-        .get(urlSetting.label_url + row.id + "/")
+        .get(urlSetting.project_url + row.id + "/")
         .then(response => {
           if (response.status === 200) {
             this.editData = response.data;
@@ -210,6 +174,9 @@ export default {
 
       this.showEditModal = true;
     },
+	// 测试获取是否为管理员
+	
+	
     deleteProject(row) {
       axios
         .delete(urlSetting.project_url + row.id + "/")
@@ -231,12 +198,12 @@ export default {
         onOk: this.deleteProject.bind(null, row)
       });
     },
-    editLabelOk() {
-      this.saveLabel();
+    ok() {
+      this.saveProject();
     },
-    saveLabel() {
+    saveProject() {
       axios
-        .put(urlSetting.label_url + this.editData.id + "/", this.editData)
+        .put(urlSetting.project_url + this.editData.id + "/", this.editData)
         .then(response => {
           if (response.status === 200) {
             this.$Message.info("保存成功");
@@ -248,18 +215,15 @@ export default {
         })
         .then(() => {});
     },
-    editLabelCancel() {
+    cancel() {
       this.$Message.info("取消编辑");
     },
-    addLabelOk() {
-      this.$refs.CreateLabel.addLabel(this.search);
-    },
-    addLabelCancel() {
-      this.$Message.info("取消添加");
+    createProjectOk() {
+      this.$refs.CreateProject.addProject(this.search);
     }
   },
   components: {
-    CreateLabel
+    CreateProject
   }
 };
 </script>
