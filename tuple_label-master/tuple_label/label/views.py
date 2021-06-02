@@ -98,13 +98,13 @@ class Register(View):
       # 注册失败，重新注册
       # return render(request,'Myapp/register.html')
 
-# class User(View):
-#     def get(self, request):
-#         username = request.GET["username"]
-#         print(username)
-#         User_by_username = tuple_label.label.models.User.objects.filter(username=username)
-#         serializer = serializers.UserSerializer(User_by_username, many=True)
-#         return JsonResponse(serializer.data, safe=False)
+class Signer(View):
+    def get(self, request):
+        username = request.GET["username"]
+        print(username)
+        Signer_by_username = tuple_label.label.models.Signer.objects.filter(username=username)
+        serializer = serializers.SignerSerializer(Signer_by_username, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 
@@ -165,13 +165,15 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.ProjectSerializer
 
 
-class UserList(generics.ListCreateAPIView):
-    queryset = tuple_label.label.models.User.objects.all()
-    serializer_class = serializers.UserSerializer
+class SignerList(generics.ListCreateAPIView):
+    queryset = tuple_label.label.models.Signer.objects.all()
+    serializer_class = serializers.SignerSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["id"]
 
-
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = tuple_label.label.models.User.objects.all()
-    serializer_class = serializers.UserSerializer
-
+class SignerDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = tuple_label.label.models.Signer.objects.all()
+    serializer_class = serializers.SignerSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["id"]
 

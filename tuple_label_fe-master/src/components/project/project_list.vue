@@ -181,7 +181,6 @@ export default {
           this.$Message.error(error.toString());
         })
         .then(() => {});
-
       this.showEditModal = true;
     },
     deleteProject(row) {

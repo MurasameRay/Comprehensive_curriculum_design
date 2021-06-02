@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Document, Label, Project,User
+from .models import Document, Label, Project,Signer
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -34,9 +34,9 @@ class DocumentSerializer(serializers.ModelSerializer):
         fields = ("id", "text", "project_id", "annotations", "predications", "is_checked")
 
 
-class UserSerializer(serializers.ModelSerializer):
+class SignerSerializer(serializers.ModelSerializer):
     """serializer for Username"""
 
     class Meta:
-        model = User
+        model = Signer
         fields = ("id", "name", "username", "password", "project_id")

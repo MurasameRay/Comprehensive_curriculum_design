@@ -8,7 +8,7 @@ const urlSettings = {
     status_url: `http://${host}/api/project_status/`,
     project_import_url: `http://${host}/api/project_import/`,
     project_export_url: `http://${host}/api/project_export/`,
-    username_url: `http://${host}/api/user/`,
+    username_url: `http://${host}/api/signer/`,
 }
 
 export default urlSettings;

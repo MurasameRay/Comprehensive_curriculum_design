@@ -15,15 +15,27 @@
               height="40"
             >
           </div>
-
-
+  <Table
+      highlight-row
+      :columns="columns1"
+      :data="data1"
+    ></Table>
+            
              <el-breadcrumb-item>
                <div class="layout-nav">
                  用户名：
-                 {{showUserName}}
+               </div>
+
+              
+
+            </el-breadcrumb-item>
+            <el-breadcrumb-item>
+                
+                 <div class="layout-nav">
+                  {{showUserName}}
+                 
                </div>
             </el-breadcrumb-item>
-
         </Menu>
       </Header>
       <Layout>
@@ -73,8 +85,6 @@
   export default {
   data() {
     return {
-      showEditModal: false,
-      showAddModal: false,
       queryData: {},
       columns1: [
         {
@@ -123,7 +133,7 @@
   methods: {  
     search() {
       axios
-        .get(urlSetting.username_url)
+         .get(`${urlSetting.username_url}?username=${"zht"}/`)
         .then(response => {
           console.log(response);
           if (response.status === 200) {
@@ -136,11 +146,14 @@
     },
     findUser() {
       axios
-        .get(urlSetting.username_url+"zht"+'/')
+        .get(`${urlSetting.username_url}/1/?username=${"zht"}/`)
+        // .get(urlSetting.username_url+1+'/')
         .then(response => {
           console.log(response);
           if (response.status === 200) {
-            this.data1 = response.data.results;
+            // this.data1=new data();
+            // this.data1 = response.data;
+            console.log("我们获取的数据："+response.data);
           }
         })
         .catch(error => {
@@ -171,6 +184,8 @@
   left: 20px;
 }
 .layout-nav {
+  font-family: PMingLiU;
+  font-size: 20px;
   float: right;
   padding-left: 800px;
   width: 1000px;

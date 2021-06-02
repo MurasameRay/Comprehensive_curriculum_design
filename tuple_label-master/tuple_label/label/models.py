@@ -51,7 +51,7 @@ class Document(models.Model):
         db_table = "label_document"
         app_label = 'label'
 
-class User(models.Model):
+class Signer(models.Model):
     """用户信息表"""
     project_id = models.ForeignKey(
         Project,
@@ -94,7 +94,7 @@ class Admin_User(models.Model):
         on_delete=models.CASCADE,
     )
     user_id = models.ForeignKey(
-        User,
+        Signer,
         db_column="user_id",
         on_delete=models.CASCADE,
     )
