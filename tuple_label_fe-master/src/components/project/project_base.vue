@@ -17,7 +17,7 @@
           <div class="layout-nav">
             <MenuItem
               name="1"
-              to="/management/project_list"
+              to="/management/project_list_manager"
             >
             <Icon type="ios-navigate"></Icon>
             项目列表
