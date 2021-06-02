@@ -130,7 +130,6 @@ export default {
         });
     },
 
-<<<<<<< HEAD:tuple_label_fe-master/src/components/project/project_list.vue
     editProject(row) {
       axios
         .get(urlSetting.project_url + row.id + "/")
@@ -145,27 +144,6 @@ export default {
         .then(() => {});
       this.showEditModal = true;
     },
-=======
-    
-	
-	editManage(row) {
-	  axios
-	    .get(urlSetting.project_url + row.id + "/")
-	    .then(response => {
-	      if (response.status === 200) {
-	        this.editData = response.data;
-	      }
-	    })
-	    .catch(error => {
-	      this.$Message.error(error.toString());
-	    })
-	    .then(() => {});
-	
-	  this.showEditModal = true;
-	},
-	
-	
->>>>>>> 5a6ed907c17e88b21bf795f897b1d79abcfee9ff:tuple_label_fe-master/src/components/manage/user_manage.vue
     deleteProject(row) {
       axios
         .delete(urlSetting.project_url + row.id + "/")
