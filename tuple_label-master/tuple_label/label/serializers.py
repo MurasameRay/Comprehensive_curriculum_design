@@ -11,6 +11,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = ("id", "name", "description")
 
 
+
 class LabelSerializer(serializers.ModelSerializer):
     """serializer for Label"""
 

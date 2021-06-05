@@ -160,6 +160,8 @@ class ProjectList(generics.ListCreateAPIView):
     serializer_class = serializers.ProjectSerializer
 
 
+
+
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = tuple_label.label.models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
@@ -169,11 +171,9 @@ class SignerList(generics.ListCreateAPIView):
     queryset = tuple_label.label.models.Signer.objects.all()
     serializer_class = serializers.SignerSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["id"]
+    filterset_fields = ["id","username"]
 
 class SignerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = tuple_label.label.models.Signer.objects.all()
     serializer_class = serializers.SignerSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["id"]
 

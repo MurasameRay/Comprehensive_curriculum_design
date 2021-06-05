@@ -15,24 +15,19 @@
               height="40"
             >
           </div>
-  <Table
-      highlight-row
-      :columns="columns1"
-      :data="data1"
-    ></Table>
             
+    
              <el-breadcrumb-item>
                <div class="layout-nav">
                  用户名：
                </div>
-
-              
+              {{editData}}
 
             </el-breadcrumb-item>
             <el-breadcrumb-item>
                 
                  <div class="layout-nav">
-                  {{showUserName}}
+                   
                  
                </div>
             </el-breadcrumb-item>
@@ -133,11 +128,11 @@
   methods: {  
     search() {
       axios
-         .get(`${urlSetting.username_url}?username=${"zht"}/`)
+         .get(`${urlSetting.username_url}?username=${localStorage.getItem('username')}`)
         .then(response => {
           console.log(response);
           if (response.status === 200) {
-            this.data1 = response.data.results;
+            this.editData = response.data;
           }
         })
         .catch(error => {
