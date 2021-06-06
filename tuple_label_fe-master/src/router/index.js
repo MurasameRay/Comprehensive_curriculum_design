@@ -14,6 +14,7 @@ import login from "../components/login";
 import user_manage from '../components/manage/user_manage'
 import project_list_manager from '../components/project/project_list_manager'
 import project_list_signer from '../components/project/project_list_signer'
+import register from '../components/register'
 Vue.use(VueRouter)
 
 
@@ -25,6 +26,10 @@ const routes = [
   {
     path:'/login',
     component:login
+  },
+  {
+    path:'/register',
+    component:register
   },
   // {
   //   path: "/",

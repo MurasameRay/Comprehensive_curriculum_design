@@ -9,11 +9,11 @@
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
         <!--        用户名-->
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" prefix-icon="el-icon-user"></el-input>
+          <el-input placeholder="请输入用户名" v-model="loginForm.username" prefix-icon="el-icon-user"></el-input>
         </el-form-item>
         <!--        密码-->
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password" prefix-icon="el-icon-key" type="password"></el-input>
+          <el-input placeholder="请输入密码" v-model="loginForm.password" prefix-icon="el-icon-key" type="password"></el-input>
         </el-form-item>
         <!--        按钮区域-->
         <el-form-item class="btns">
@@ -116,35 +116,13 @@ import { mapMutations } from 'vuex';
       //   // ui框架自带的form表单方法
       //   this.$refs.loginFormRef.resetFields();
       // },
-     Register(){
+     Register:function(){
               // 预验证
-              this.$refs.loginFormRef.validate(async valid => {
-                //未验证通过则直接return
-                if (!valid) return;
-                //不加await的化不会打印出数据，await只能用于async修饰的函数   //this.loginForm
-                const response = await this.$http.post('/register/',this.loginForm ).catch(() => this.$message.error("注册失败,请联系Tel:"))
-                // {data:res}解构，将得到的返回值的data解构为res
-                console.log(response.data)
-                // console.log(res.meta.statusText)
-                //从res的元数据中得到返回状态
-                if (response.status !== 200) {return;}
-                if (response.data.token) {
-                  this.userToken = 'Ray ' + response.data.token;
-                  // token = localStorage.getItem('Authorization');
-                  // 将用户token保存到vuex中
-                  localStorage.setItem('username', this.loginForm.username);
-                  this.changeLogin({Authorization: this.userToken});
                   this.$router.push({
-                    path:'/management/project_list_manager',
-                    params:{
-                      id:1
-                    }
+                    path:'/register',
                   });
                 }
-                else this.removeStorage();
-                if (response.data.error) {return this.$message.error(response.data.error)}
-              });
-            }
+            
     }
   }
 
