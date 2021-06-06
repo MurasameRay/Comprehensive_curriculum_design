@@ -44,7 +44,7 @@ import { mapMutations } from 'vuex';
 		  },
         // 验证规则对象
         loginFormRules: {
-          验证用户
+          //验证用户
 		  name: [
 		    {required: true, message: '请输入昵称', trigger: 'blur'},
 		    {min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur'}
