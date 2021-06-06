@@ -45,10 +45,10 @@ import { mapMutations } from 'vuex';
         // 验证规则对象
         loginFormRules: {
           //验证用户
-		  name: [
-		    {required: true, message: '请输入昵称', trigger: 'blur'},
-		    {min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur'}
-		  ],
+          name: [
+            {required: true, message: '请输入昵称', trigger: 'blur'},
+            {min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur'}
+          ],
           username: [
             {required: true, message: '请输入用户名', trigger: 'blur'},
             {min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur'}
@@ -57,10 +57,10 @@ import { mapMutations } from 'vuex';
             {required: true, message: '请输入登录密码', trigger: 'blur'},
             {min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur'}
           ],
-		  repassword: [
-		    {required: true, message: '请再次输入密码', trigger: 'blur'},
-		    {min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur'}
-		  ]
+          repassword: [
+            {required: true, message: '请再次输入密码', trigger: 'blur'},
+            {min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur'}
+          ]
         }
       }
     },
