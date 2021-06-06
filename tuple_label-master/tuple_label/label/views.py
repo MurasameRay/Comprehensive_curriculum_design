@@ -60,20 +60,20 @@ class Login(View):
 class Register(View):
     def post(self,request):
         body_dict = json.loads(request.body)
-        name = "zht"
-        admin_id = "1"
-        username = "zht"
-        password = "123456"
-        # name = body_dict.get("name")
+        # name = "zht"
+        # admin_id = "1"
+        # username = "zht"
+        # password = "123456"
+        name = body_dict.get("name")
         # admin_id = body_dict.get("admin_id")
-        # username = body_dict.get("username")
-        # password = body_dict.get("password")
+        username = body_dict.get("username")
+        password = body_dict.get("password")
 
         print(username, "+", password)
         #添加至数据库
         tuple_label.label.models.Signer.objects.create(
             name=name,
-            admin_id=admin_id,
+            admin_id=0,
             username=username,
             password=password
         )
