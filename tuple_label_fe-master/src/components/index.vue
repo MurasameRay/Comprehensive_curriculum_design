@@ -20,9 +20,9 @@
              <el-breadcrumb-item>
                <div class="layout-nav">
                  用户名：
+                  {{editData.results[0].username}}
                </div>
-              {{editData.results[0].username}}
-
+             
             </el-breadcrumb-item>
             <el-breadcrumb-item>
                 

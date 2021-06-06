@@ -39,11 +39,11 @@ class AdminSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Admin
-        fields = ("id", "name", "username", "password", "project_id")
+        fields = ("id", "name", "username", "password")
 
 class SignerSerializer(serializers.ModelSerializer):
     """serializer for Username"""
 
     class Meta:
         model = Signer
-        fields = ("id", "name", "username", "password", "project_id")
+        fields = ("id", "admin_id", "name", "username", "password")

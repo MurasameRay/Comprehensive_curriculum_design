@@ -59,7 +59,7 @@ class Admin(models.Model):
     password = models.CharField(max_length=255)
     class Meta:
         managed = True
-        db_table = "lable_admin"
+        db_table = "label_admin"
         app_label = 'label'
 
 
@@ -73,5 +73,5 @@ class Signer(models.Model):
     update_time = models.DateTimeField(auto_now=True)
     class Meta:
         managed = True
-        db_table = "lable_user"
+        db_table = "label_signer"
         app_label = 'label'

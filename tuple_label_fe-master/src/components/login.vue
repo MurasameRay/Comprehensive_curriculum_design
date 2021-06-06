@@ -135,7 +135,7 @@ import { mapMutations } from 'vuex';
                   localStorage.setItem('username', this.loginForm.username);
                   this.changeLogin({Authorization: this.userToken});
                   this.$router.push({
-                    path:'/management/project_list',
+                    path:'/management/project_list_manager',
                     params:{
                       id:1
                     }
