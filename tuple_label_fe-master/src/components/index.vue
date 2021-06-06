@@ -21,7 +21,7 @@
                <div class="layout-nav">
                  用户名：
                </div>
-              {{editData}}
+              {{editData.results[0].username}}
 
             </el-breadcrumb-item>
             <el-breadcrumb-item>

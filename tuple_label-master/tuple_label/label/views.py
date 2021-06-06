@@ -68,7 +68,6 @@ class Register(View):
         tuple_label.label.models.User.objects.create(
             username=username,
             password=password,
-            project_id=project_id
         )
 
         # 校验注册，名字不可重复
