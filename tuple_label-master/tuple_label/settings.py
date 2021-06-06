@@ -33,7 +33,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
     "tuple_label.label",
-    "tuple_label.label.ray",
     "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
