@@ -130,25 +130,20 @@ export default {
         });
     },
 
-    
-	
-	editManage(row) {
-	  axios
-	    .get(urlSetting.project_url + row.id + "/")
-	    .then(response => {
-	      if (response.status === 200) {
-	        this.editData = response.data;
-	      }
-	    })
-	    .catch(error => {
-	      this.$Message.error(error.toString());
-	    })
-	    .then(() => {});
-	
-	  this.showEditModal = true;
-	},
-	
-	
+    editProject(row) {
+      axios
+        .get(urlSetting.project_url + row.id + "/")
+        .then(response => {
+          if (response.status === 200) {
+            this.editData = response.data;
+          }
+        })
+        .catch(error => {
+          this.$Message.error(error.toString());
+        })
+        .then(() => {});
+      this.showEditModal = true;
+    },
     deleteProject(row) {
       axios
         .delete(urlSetting.project_url + row.id + "/")

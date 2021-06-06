@@ -20,6 +20,7 @@
       @on-ok="editLabelOk"
       @on-cancel="editLabelCancel"
     >
+
       <Form
         :model="editData"
         :label-width="80"
