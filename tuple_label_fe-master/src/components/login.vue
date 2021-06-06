@@ -117,7 +117,7 @@ import { mapMutations } from 'vuex';
       //   this.$refs.loginFormRef.resetFields();
       // },
      Register:function(){
-              // 预验证
+              // 预验证 
                   this.$router.push({
                     path:'/register',
                   });

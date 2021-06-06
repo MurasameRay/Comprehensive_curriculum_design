@@ -18,9 +18,8 @@ const store = new Vuex.Store({
     },
     removeStorage(state){
      state.token =null;
-     localStorage.removeItem(key)
+     localStorage.removeItem(key);
    }
   }
 });
- 
 export default store;

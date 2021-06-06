@@ -66,7 +66,7 @@ import { mapMutations } from 'vuex';
       }
     },
     methods: {
-      ...mapMutations(['changeLogin','removeStorage']),
+     ...mapMutations(['changeLogin','removeStorage']),
       
       
      Register(){
