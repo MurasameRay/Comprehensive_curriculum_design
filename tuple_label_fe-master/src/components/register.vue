@@ -21,7 +21,7 @@
         </el-form-item>
 		<!--		确认密码-->
 		<el-form-item prop="repassword">
-		  <el-input placeholder="请确认密码"  prefix-icon="el-icon-key" type="password"></el-input>
+		  <el-input placeholder="请确认密码" v-model="loginForm.repassword" prefix-icon="el-icon-key" type="password"></el-input>
 		</el-form-item>
         <!--        按钮区域-->
         <el-form-item class="btns">
@@ -41,10 +41,11 @@ import { mapMutations } from 'vuex';
 			name:'',
 		    username: '',
 		    password: '',
+			repassword:'',
 		  },
         // 验证规则对象
         loginFormRules: {
-          验证用户
+          // 验证用户
 		  name: [
 		    {required: true, message: '请输入昵称', trigger: 'blur'},
 		    {min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur'}
@@ -109,7 +110,7 @@ import { mapMutations } from 'vuex';
 
   .login_box {
     width: 450px;
-    height: 500px;
+    height: 450px;
     background-color: white;
     border-radius: 3px;
     /*容器内居中*/
