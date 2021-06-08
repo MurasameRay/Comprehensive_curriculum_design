@@ -17,13 +17,12 @@
           </div>
             
     
-             <el-breadcrumb-item v-if="editData.results">
-               <div class="layout-nav">
+          
+               <div class="layout-nav" v-if="editData.results">
                  用户名：
                   {{editData.results[0].username}}
                </div>
-             
-            </el-breadcrumb-item>
+    
         </Menu>
       </Header>
       <Layout>
@@ -175,7 +174,7 @@
   font-family: PMingLiU;
   font-size: 20px;
   float: right;
-  padding-left: 800px;
+  padding-left: 600px;
   width: 1000px;
   margin: 0 auto;
   margin-right: 20px;

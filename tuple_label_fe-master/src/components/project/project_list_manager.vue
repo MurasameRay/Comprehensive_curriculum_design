@@ -70,7 +70,7 @@
       <Modal
         v-model="showEditModal2"
         title="管理用户"
-        @on-ok="saveSignerOK"
+        @on-ok="saveSignerOk"
         @on-cancel="cancel"
         
       >
@@ -92,15 +92,18 @@
           </FormItem>
         </Form>
       </Modal>
-
+<div class="ant-modal-header" ref="refModel">
       <Modal
         v-model="createSignerOption.isShow"
         title="新增标注员"
         @on-ok="createSignerOk"
         @on-cancel="createSignerOption.isShow = false"
+        :getContainer="() => $refs.refModel"
       >
+      
         <CreateSigner ref="CreateSigner"></CreateSigner>
       </Modal>
+      </div>
     </div>
   </div>
 </template>
@@ -220,57 +223,17 @@ export default {
                 "Button",
                 {
                   props: {
-                    type: "primary",
-                    size: "default",
-                    to: `/project/${params.row.id}/documents`
-                  },
-                  style: {
-                    marginRight: "5px"
-                  }
-                },
-                "详情"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "default"
-                  },
-                  on: {
-                    click: () => {
-                      this.editProject(params.row);
-                    }
-                  }
-                },
-                "编辑"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
                     type: "error",
                     size: "default"
                   },
                   on: {
                     click: () => {
-                      this.doDelete(params.row);
+                      this.doDelete_Signer(params.row);
                     }
                   }
                 },
                 "删除"
               ),
-			  h(
-			    "Button",
-			    {
-			      props: {
-			        type: "success",
-			        size: "default",
-			        to: `/management/manage`
-			      },
-			    },
-			    "管理"
-			  ),
             ]);
           }
         }
@@ -384,6 +347,27 @@ export default {
         onOk: this.deleteProject.bind(null, row)
       });
     },
+    doDelete_Signer(row) {
+      this.$Modal.confirm({
+        content: `确认删除 ${row.name} ？`,
+        onOk: this.deleteSigner.bind(null, row)
+      });
+    },
+    deleteSigner(row) {
+      axios
+        .delete(urlSetting.username_url + row.id + "/")
+        .then(response => {
+          console.log(response);
+          if (response.status === 204) {
+            this.$Message.success("删除成功");
+            this.search_project();
+          }
+        })
+        .catch(error => {
+          this.$Message.error(error.toString());
+        })
+        .then(() => {});
+    },
     ok() {
       this.saveProject();
     },
@@ -431,3 +415,10 @@ export default {
   },
 };
 </script>
+<style>
+ /deep/.ant-modal-header {
+  border-bottom: 0;
+  border-radius: 0;
+  width: 1000px;
+  }
+</style>

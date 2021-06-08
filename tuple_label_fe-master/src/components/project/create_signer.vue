@@ -1,7 +1,6 @@
 <template>
-  <div style="width:1000px">
+  <div style="width:430px">
     <div>
-      <br><br>
       <Row>
         <Col span="1">
         <Button
@@ -16,41 +15,6 @@
       :columns="columns"
       :data="data"
     ></Table>
-
-      <Modal
-        v-model="showEditModal"
-        title="管理用户"
-        @on-ok="saveSignerOK"
-        @on-cancel="cancel"
-      >
-        <Form
-          :model="editData"
-          :label-width="80"
-          
-        >
-          <FormItem label="id">
-            <Input
-              disabled
-              v-model="editData.id"
-            />
-          </FormItem>
-          <FormItem label="name">
-            <Input v-model="editData.name" />
-          </FormItem>
-          <FormItem label="user_name">
-            <Input v-model="editData.username" />
-          </FormItem>
-        </Form>
-      </Modal>
-
-      <Modal
-        v-model="createSignerOption.isShow"
-        title="新增标注员"
-        @on-ok="createSignerOk"
-        @on-cancel="createSignerOption.isShow = false"
-      >
-        <CreateSigner ref="CreateSigner"></CreateSigner>
-      </Modal>
     </div>
   </div>
 </template>
@@ -65,20 +29,22 @@ export default {
         {
           title: "User_ID",
           key: "id",
-          width: "100px"
+          width: "107px"
         },
         {
           title: "Name",
-          key: "name"
+          key: "name",
+          width: "107px"
         },
         {
           title: "User_Name",
-          key: "username"
+          key: "username",
+          width: "107px"
         },
         {
           title: "操作",
           key: "action",
-          width: 400,
+          width: 107,
           align: "center",
           // 编辑和删除按钮
           render: (h, params) => {
@@ -105,6 +71,7 @@ export default {
       data: [],
       editData: {
         id: "",
+        admin_id:"",
         name: "",
         username: ""
       },
@@ -117,13 +84,14 @@ export default {
     this.search_admin();
   },
   methods: {
-    addSigner(callback) {
+    addSigner(row) {
+      row.admin_id=localStorage.getItem("admin_id")
       axios
-        .put(urlSetting.username_url + this.editData.id + "/", this.editData)
+        .put(urlSetting.username_url + row.id + "/", row)
         .then(response => {
           if (response.status === 200) {
             this.$Message.info("保存成功");
-            this.search();
+            this.search_admin();
           }
         })
         .catch(error => {
