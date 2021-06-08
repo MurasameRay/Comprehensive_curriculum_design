@@ -72,6 +72,7 @@
         title="管理用户"
         @on-ok="saveSignerOK"
         @on-cancel="cancel"
+        
       >
         <Form
           :model="editData2"
@@ -421,7 +422,7 @@ export default {
       this.$refs.CreateProject.addProject(this.search_project);
     },
     createSignerOk(){
-      this.$refs.CreateSigner.addSigner(this.search_admin);
+      this.$refs.CreateSigner.search_admin();
     },
   },
   components: {

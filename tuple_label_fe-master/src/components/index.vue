@@ -24,13 +24,6 @@
                </div>
              
             </el-breadcrumb-item>
-            <el-breadcrumb-item>
-                
-                 <div class="layout-nav">
-                   
-                 
-               </div>
-            </el-breadcrumb-item>
         </Menu>
       </Header>
       <Layout>

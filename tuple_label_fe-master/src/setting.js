@@ -1,5 +1,5 @@
-let host = window.location.host+':8000'
-
+// let host = window.location.host+':8000'
+let host = 'localhost:8000'
 const urlSettings = {
     project_url: `http://${host}/api/project/`,
     label_url: `http://${host}/api/label/`,
