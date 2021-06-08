@@ -1,18 +1,18 @@
 <template>
   <Form
-    :model="formItem"
+    :model="formItem2"
     :label-width="100"
   >
     <FormItem label="Signer Name">
       <Input
-        v-model="formItem.name"
+        v-model="formItem2.name"
         placeholder="Enter Signer Name"
       />
     </FormItem>
-    <FormItem label="Description">
+    <FormItem label="Signer UserName">
       <Input
-        v-model="formItem.description"
-        placeholder="Enter Description"
+        v-model="formItem2.username"
+        placeholder="Enter Signer UserName"
       />
     </FormItem>
   </Form>
@@ -24,18 +24,20 @@ import urlSetting from "../../setting";
 export default {
   data() {
     return {
-      formItem: {
-        name: "",
-        description: ""
+      formItem2: {
+        admin_id:"",
+        name:"",
+        username: ""
       }
     };
   },
   methods: {
-    addProject(callback) {
+    addSigner(callback) {
+      this.formItem.admin_id=0;
       axios({
         method: "post",
-        url: urlSetting.project_url,
-        data: this.formItem
+        url: urlSetting.username_url,
+        data: this.formItem2
       })
         .then(response => {
           if (response.status === 201) {

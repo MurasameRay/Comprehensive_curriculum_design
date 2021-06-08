@@ -40,9 +40,11 @@ urlpatterns = [
     path("api/project_import/", views.ProjectImport.as_view()),
     path("api/project_export/", views.ProjectExport.as_view()),
     path("api/login/",views.Login.as_view()),
+    path("api/login_admin/",views.Login_admin.as_view()),
     path("api/register/",views.Register.as_view()),
     path("api/signer/", views.SignerList.as_view()),
-    # path("api/user/", views.UserList.as_view()),
     path("api/signer/<int:pk>/", views.SignerDetail.as_view()),
+    path("api/admin/", views.AdminList.as_view()),
+    path("api/admin/<int:pk>/", views.AdminDetail.as_view()),
     path("", views.ProjectList.as_view()),
 ]
