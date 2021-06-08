@@ -17,7 +17,7 @@
           </div>
             
     
-             <el-breadcrumb-item>
+             <el-breadcrumb-item v-if="editData.results">
                <div class="layout-nav">
                  用户名：
                   {{editData.results[0].username}}
