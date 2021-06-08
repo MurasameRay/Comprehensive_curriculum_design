@@ -21,7 +21,7 @@
 <script>
 const axios = require("axios");
 import urlSetting from "../../setting";
-
+// import Project_List_Manager from "./project_list_manager.vue"
 export default {
   data() {
     return {

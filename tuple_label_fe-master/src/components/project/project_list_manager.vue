@@ -70,9 +70,6 @@
       <Modal
         v-model="showEditModal2"
         title="管理用户"
-        @on-ok="saveSignerOk"
-        @on-cancel="cancel"
-        
       >
         <Form
           :model="editData2"
@@ -97,7 +94,7 @@
         v-model="createSignerOption.isShow"
         title="新增标注员"
         @on-ok="createSignerOk"
-        @on-cancel="createSignerOption.isShow = false"
+        @on-cancel="createSigner_cancel"
         :getContainer="() => $refs.refModel"
       >
       
@@ -354,13 +351,19 @@ export default {
       });
     },
     deleteSigner(row) {
+      //login删除的是标注员
+      // async valid => {
+      // const response = await this.$http.put('/login/',row.username).catch(() => this.$message.error("删除失败,请联系Tel:"))
+      // }
+      row.admin_id="0";
       axios
-        .delete(urlSetting.username_url + row.id + "/")
+        .put(urlSetting.username_url + row.id + "/", row)
         .then(response => {
           console.log(response);
-          if (response.status === 204) {
+          if (response.status === 200) {
             this.$Message.success("删除成功");
-            this.search_project();
+            this.search_admin();
+            this.$refs.CreateSigner.search_admin();
           }
         })
         .catch(error => {
@@ -406,8 +409,14 @@ export default {
       this.$refs.CreateProject.addProject(this.search_project);
     },
     createSignerOk(){
+      this.search_admin();
       this.$refs.CreateSigner.search_admin();
     },
+    createSigner_cancel(){
+      this.createSignerOption.isShow = false;
+      this.search_admin();
+      this.$refs.CreateSigner.search_admin();
+    }
   },
   components: {
     CreateProject,
@@ -415,10 +424,3 @@ export default {
   },
 };
 </script>
-<style>
- /deep/.ant-modal-header {
-  border-bottom: 0;
-  border-radius: 0;
-  width: 1000px;
-  }
-</style>

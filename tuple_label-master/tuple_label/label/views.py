@@ -56,6 +56,13 @@ class Login(View):
                 "message": "登录失败,请校验用户名或者密码",
             })
 
+    def delete(self, request):
+        body_dict = json.loads(request.body)
+        username = body_dict.get("username")
+        deleteResult = User.objects.filter(username=username).delete()
+        if deleteResult:
+            return 1
+
 class Login_admin(View):
     def post(self,request):
         body_dict=json.loads(request.body)
