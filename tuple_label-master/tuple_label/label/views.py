@@ -56,6 +56,32 @@ class Login(View):
                 "message": "登录失败,请校验用户名或者密码",
             })
 
+class Login_admin(View):
+    def post(self,request):
+        body_dict=json.loads(request.body)
+        username=body_dict.get("username")
+        password=body_dict.get("password")
+        # password = request.POST['password']
+        print(password)
+        user = authenticate(is_superuser=1,username=username,password=password)
+        admin = tuple_label.label.models.Admin.objects.filter(username=username, password=password).count()
+        print(admin)
+        if user != None and admin != 0:
+            old_token = Token.objects.filter(user=user)
+            old_token.delete()
+            # 创建新的token并传递给前端
+            token = Token.objects.create(user=user)
+            print(token)
+            return JsonResponse({
+                "status": 200,
+                "message": "成功登录",
+                "token": token.key
+            })
+        else:
+            return JsonResponse({
+                "status": 201,
+                "message": "登录失败,请校验管理员名或者密码",
+            })
 
 class Register(View):
     def post(self,request):
@@ -78,7 +104,7 @@ class Register(View):
             password=password
         )
 
-        # 校验注册，名字不可重复
+        #a 校验注册，名字不可重复
         user = User.objects.filter(username=username).first()
         # 创建新的token并传递给前端
         user=User.objects.create_user(
@@ -165,9 +191,8 @@ class LabelDetail(generics.RetrieveUpdateDestroyAPIView):
 class ProjectList(generics.ListCreateAPIView):
     queryset = tuple_label.label.models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
-
-
-
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["id", "admin_id", "name"]
 
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = tuple_label.label.models.Project.objects.all()
@@ -178,9 +203,21 @@ class SignerList(generics.ListCreateAPIView):
     queryset = tuple_label.label.models.Signer.objects.all()
     serializer_class = serializers.SignerSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["id","username"]
+    filterset_fields = ["id","admin_id","username","name"]
+
 
 class SignerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = tuple_label.label.models.Signer.objects.all()
     serializer_class = serializers.SignerSerializer
 
+
+class AdminList(generics.ListCreateAPIView):
+    queryset = tuple_label.label.models.Admin.objects.all()
+    serializer_class = serializers.AdminSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["id","username"]
+
+
+class AdminDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = tuple_label.label.models.Admin.objects.all()
+    serializer_class = serializers.AdminSerializer

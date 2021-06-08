@@ -18,7 +18,7 @@
         <!--        按钮区域-->
         <el-form-item class="btns">
           <el-button type="primary" @click="Login">标注员登录</el-button> 
-		  <el-button type="primary" @click="Loginm">管理员登录</el-button>
+		  <el-button type="primary" @click="Login_admin">管理员登录</el-button>
 		  <el-button type="info" @click="Register">注册</el-button>
         </el-form-item>
       </el-form>
@@ -82,13 +82,13 @@ import { mapMutations } from 'vuex';
         });
       },
 	  
-	  Loginm:function() {
+	  Login_admin:function() {
         // 预验证
         this.$refs.loginFormRef.validate(async valid => {
           //未验证通过则直接return
           if (!valid) return;
           //不加await的化不会打印出数据，await只能用于async修饰的函数   //this.loginForm
-          const response = await this.$http.post('/login/', this.loginForm).catch(() => this.$message.error("登录失败,请联系Tel:"))
+          const response = await this.$http.post('/login_admin/', this.loginForm).catch(() => this.$message.error("登录失败,请联系Tel:"))
           // {data:res}解构，将得到的返回值的data解构为res
           console.log(response.data)
           // console.log(res.meta.statusText)
@@ -99,6 +99,7 @@ import { mapMutations } from 'vuex';
             // token = localStorage.getItem('Authorization');
             // 将用户token保存到vuex中
             this.changeLogin({Authorization: this.userToken});
+            localStorage.setItem('username', this.loginForm.username);
             this.$router.push({
               path:'/management/project_list_manager',
                 params:{

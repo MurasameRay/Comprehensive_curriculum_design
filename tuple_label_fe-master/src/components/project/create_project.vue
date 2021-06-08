@@ -20,18 +20,21 @@
 <script>
 const axios = require("axios");
 import urlSetting from "../../setting";
+import adminVue from '../admin_user/admin.vue';
 
 export default {
   data() {
     return {
       formItem: {
         name: "",
-        description: ""
+        description: "",
+        admin_id:""
       }
     };
   },
   methods: {
     addProject(callback) {
+      this.formItem.admin_id=localStorage.getItem("admin_id")
       axios({
         method: "post",
         url: urlSetting.project_url,
