@@ -17,8 +17,18 @@ Vue.config.productionTip = false
 
 //配置axios全局使用
 import axios from 'axios'
-axios.defaults.baseURL='http://127.0.0.1:8000/api/'
+// axios.defaults.baseURL='http://0.0.0.0:8000/api/'
 // 将vue的原型http对象设置未axios，以后用这个原型就可以直接使用
+let protocol = window.location.protocol; //协议
+   let host = window.location.host; //主机
+   let reg = /^localhost+/;
+   if(reg.test(host)) {
+      //若本地项目调试使用
+       axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
+   } else {
+       //动态请求地址             协议               主机
+       axios.defaults.baseURL = protocol + "//" + host  +":8000/api/";
+   }
 Vue.prototype.$http = axios
 
 new Vue({
