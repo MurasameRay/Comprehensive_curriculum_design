@@ -13,7 +13,7 @@ import project_status from '../components/project/project_status'
 import login from "../components/login";
 import user_manage from '../components/manage/user_manage'
 import project_list_manager from '../components/project/project_list_manager'
-import project_list_signer from '../components/project/project_list_signer'
+import project_list from '../components/project/project_list'
 import register from '../components/register'
 Vue.use(VueRouter)
 
@@ -44,8 +44,8 @@ const routes = [
 	    component: project_list_manager,
 	  },
 	  {
-        path: 'project_list_signer',
-        component: project_list_signer,
+        path: 'project_list',
+        component: project_list,
       },
 	  
       {

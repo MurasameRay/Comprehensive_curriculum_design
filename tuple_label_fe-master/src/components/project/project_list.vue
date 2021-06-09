@@ -92,7 +92,7 @@ export default {
       editData: {
         id: "",
         name: "",
-        description: ""
+        description: "",
       },
       createProjectOption: {
         isShow: false
@@ -100,23 +100,37 @@ export default {
     };
   },
   mounted() {
-    this.search();
+    this.search_user();
+    this.search_project();
   },
   methods: {
-    search() {
+    search_project() {
       axios
-        .get(urlSetting.project_url)
+        .get(`${urlSetting.project_url}?admin_id=${localStorage.getItem('admin_id')}`)
         .then(response => {
           console.log(response);
           if (response.status === 200) {
-            this.data1 = response.data.results;
+           this.data1=response.data.results;
           }
         })
         .catch(error => {
           this.$Message.error(error.toString());
         });
     },
-	
+	  search_user() {
+      axios
+        .get(`${urlSetting.username_url}?username=${localStorage.getItem('username')}`)
+        .then(response => {
+          console.log(response);
+          if (response.status === 200) {
+            localStorage.setItem("admin_id", response.data.results[0].admin_id);
+          }
+        })
+        .catch(error => {
+          this.$Message.error(error.toString());
+        });
+    },
+  
     editProject(row) {
       axios
         .get(urlSetting.project_url + row.id + "/")
@@ -142,7 +156,7 @@ export default {
           console.log(response);
           if (response.status === 204) {
             this.$Message.success("删除成功");
-            this.search();
+            this.search_project();
           }
         })
         .catch(error => {
@@ -165,7 +179,7 @@ export default {
         .then(response => {
           if (response.status === 200) {
             this.$Message.info("保存成功");
-            this.search();
+            this.search_project();
           }
         })
         .catch(error => {

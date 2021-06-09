@@ -34,7 +34,8 @@ import { mapMutations } from 'vuex';
         // 数据绑定对象
         loginForm: {
           username: 'zht',
-          password: '123456'
+          password: '123456',
+          admin_id: '0'
         },
         // 验证规则对象
         loginFormRules: {
@@ -71,7 +72,7 @@ import { mapMutations } from 'vuex';
             localStorage.setItem('username', this.loginForm.username);
             this.changeLogin({Authorization: this.userToken});
             this.$router.push({
-              path:'/management/project_list_signer',
+              path:'/management/project_list',
                 params:{
                   username:'zht'
                 }
@@ -94,6 +95,7 @@ import { mapMutations } from 'vuex';
           // console.log(res.meta.statusText)
           //从res的元数据中得到返回状态
           if (response.status !== 200) {return;}
+          search_adminID();
           if (response.data.token) {
             this.userToken = 'Ray ' + response.data.token;
             // token = localStorage.getItem('Authorization');
@@ -111,6 +113,19 @@ import { mapMutations } from 'vuex';
           if (response.data.error) {return this.$message.error(response.data.error)}
         });
       },
+      search_adminID() {
+      axios
+        .get(`${urlSetting.admin_url}?username=${localStorage.getItem('username')}`)
+        .then(response => {
+          console.log(response);
+          if (response.status === 200) {
+            localStorage.setItem('admin_id', response.data.results[0].id);
+          }
+        })
+        .catch(error => {
+          this.$Message.error(error.toString());
+        });
+    },
       //重置登录表单
       // resetLoginForm() {
       //   // console.log(this)
